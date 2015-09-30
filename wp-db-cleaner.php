@@ -30,6 +30,10 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+if ( ! defined( 'WP_DB_CLEAN_VERSION' ) ) {
+	define( 'WP_DB_CLEAN_VERSION', '1.0.0' );
+}
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-db-cleaner-activator.php

@@ -51,7 +51,7 @@ class Db_Cleaner_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( 'wp-db-clean', plugin_dir_url( __FILE__ ) . 'css/db-cleaner.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'wp-db-clean', plugin_dir_url( __FILE__ ) . 'css/db-cleaner.css', array(), WP_DB_CLEAN_VERSION, 'all' );
 
 	}
 
@@ -74,7 +74,7 @@ class Db_Cleaner_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( 'wp-db-clean', plugin_dir_url( __FILE__ ) . 'js/db-cleaner.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'wp-db-clean', plugin_dir_url( __FILE__ ) . 'js/db-cleaner.js', array( 'jquery' ), WP_DB_CLEAN_VERSION, false );
 
 	}
 
