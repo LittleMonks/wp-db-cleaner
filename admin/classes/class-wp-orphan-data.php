@@ -147,6 +147,29 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		}
 
+		/**
+		 * Get all orphan data fro wp_posts table with no author id
+		 *
+		 * @param bool|false $count
+		 *
+		 * @return mixed
+		 */
+		public function get_wp_posts_author_orphan_rows ( $count = false ) {
+
+			global $wpdb;
+
+			$select = ( $count ) ? 'COUNT(*)' : '*';
+
+			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->users} users ON (posts.post_author = users.ID) WHERE (users.ID IS NULL)" );
+
+			if ( $count ) {
+				return $wpdb->get_var( $query );
+			} else {
+				return $wpdb->get_results( $query );
+			}
+
+		}
+
 	}
 
 }
