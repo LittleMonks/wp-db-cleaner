@@ -99,8 +99,9 @@ if ( ! class_exists( 'Db_Cleaner_Admin' ) ) {
 		}
 
 		private function init() {
-			global $orphan_data;
-			$orphan_data = new Wp_Orphan_Data();
+			global $orphan_data, $duplicate_data;
+			$orphan_data    = new Wp_Orphan_Data();
+			$duplicate_data = new Wp_Duplicate_Data();
 		}
 
 	}
