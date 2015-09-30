@@ -13,9 +13,9 @@
  * @package           Db_Cleaner
  *
  * @wordpress-plugin
- * Plugin Name:       WordPress Plugin Boilerplate
+ * Plugin Name:       WP DB Cleaner
  * Plugin URI:        http://example.com/plugin-name-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Clean WordPress orphan and duplicate data from database
  * Version:           1.0.0
  * Author:            Your Name or Your Company
  * Author URI:        http://example.com/
@@ -71,10 +71,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-db-cleaner.php';
  * @since    1.0.0
  */
 function run_wp_db_cleaner() {
-
 	$plugin = new Db_Cleaner();
-	$plugin->run();
-
 }
 
 run_wp_db_cleaner();

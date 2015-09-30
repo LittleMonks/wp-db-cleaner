@@ -28,8 +28,24 @@ class Db_Cleaner_Admin {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
+		add_action( 'admin_menu', array( $this, 'add_tool_page' ) );
+	}
 
+	/**
+	 * Add tools admin menu
+	 */
+	public function add_tool_page() {
+		add_management_page( 'Wp clean', 'Wp Clean', 'manage_options', 'db-clean', array(
+			$this,
+			'get_clean_ui'
+		) );
+	}
 
+	/**
+	 * Load template file for function
+	 */
+	public function get_clean_ui() {
+		require_once( plugin_dir_path( __FILE__ ) . '/template/db-cleaner-page.php' );
 	}
 
 	/**
