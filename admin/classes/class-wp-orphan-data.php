@@ -101,6 +101,29 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		}
 
+		/**
+		 * Get all orphan data from wp_term_relationships table
+		 *
+		 * @param bool|false $count
+		 *
+		 * @return mixed
+		 */
+		public function get_wp_term_relationships_orphan_rows ( $count = false ) {
+
+			global $wpdb;
+
+			$select = ( $count ) ? 'COUNT(*)' : '*';
+
+			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->term_relationships} relationships LEFT JOIN {$wpdb->term_taxonomy} taxonomy ON (relationships.term_taxonomy_id = taxonomy.term_taxonomy_id) WHERE (taxonomy.term_taxonomy_id IS NULL)" );
+
+			if ( $count ) {
+				return $wpdb->get_var( $query );
+			} else {
+				return $wpdb->get_results( $query );
+			}
+
+		}
+
 	}
 
 }
