@@ -78,6 +78,29 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		}
 
+		/**
+		 * Get all orphan data from wp_term_taxonomy table
+		 *
+		 * @param bool|false $count
+		 *
+		 * @return mixed
+		 */
+		public function get_wp_term_taxonomy_orphan_rows ( $count = false ) {
+
+			global $wpdb;
+
+			$select = ( $count ) ? 'COUNT(*)' : '*';
+
+			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->term_taxonomy} LEFT JOIN {$wpdb->terms} ON ({$wpdb->term_taxonomy}.term_id = {$wpdb->terms}.term_id) WHERE ({$wpdb->terms}.term_id IS NULL)" );
+
+			if ( $count ) {
+				return $wpdb->get_var( $query );
+			} else {
+				return $wpdb->get_results( $query );
+			}
+
+		}
+
 	}
 
 }
