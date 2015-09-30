@@ -55,6 +55,29 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		}
 
+		/**
+		 * Get all orphan data fro wp_postmeta table
+		 *
+		 * @param bool|false $count
+		 *
+		 * @return mixed
+		 */
+		public function get_wp_postmeta_orhpan_rows ( $count = false ) {
+
+			global $wpdb;
+
+			$select = ( $count ) ? 'COUNT(*)' : '*';
+
+			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->postmeta} LEFT JOIN {$wpdb->posts} ON ({$wpdb->postmeta}.post_id = {$wpdb->posts}.ID) WHERE ({$wpdb->posts}.ID IS NULL)" );
+
+			if ( $count ) {
+				return $wpdb->get_var( $query );
+			} else {
+				return $wpdb->get_results( $query );
+			}
+
+		}
+
 	}
 
 }
