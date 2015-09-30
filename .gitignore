@@ -1,13 +1,36 @@
-*.log
-.htaccess
-sitemap.xml
-sitemap.xml.gz
-wp-config.php
-wp-content/advanced-cache.php
-wp-content/backup-db/
-wp-content/backups/
-wp-content/blogs.dir/
-wp-content/cache/
-wp-content/upgrade/
-wp-content/uploads/
-wp-content/wp-cache-config.php
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac crap
+.DS_Store
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# PhpStorm
+.idea
+
+# Eclipse
+*.pydevproject
+.project
+.metadata
+build/
+tmp/
+tests/clover.xml
+
+# Grunt
+node_modules
+
+# Vendor
+vendor
+
+# Temporary files
+*~
