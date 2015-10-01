@@ -38,7 +38,7 @@ if ( ! defined( 'WP_DB_CLEAN_VERSION' ) ) {
  * The code that runs during plugin activation.
  * This action is documented in includes/class-db-cleaner-activator.php
  */
-function activate_plugin_name() {
+function wp_db_clean_activate_plugin_name() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-db-cleaner-activator.php';
 	Db_Cleaner_Activator::activate();
 }
@@ -47,13 +47,13 @@ function activate_plugin_name() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-db-cleaner-deactivator.php
  */
-function deactivate_plugin_name() {
+function wp_db_clean_deactivate_plugin_name() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-db-cleaner-deactivator.php';
 	Db_Cleaner_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_plugin_name' );
-register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
+register_activation_hook( __FILE__, 'wp_db_clean_activate_plugin_name' );
+register_deactivation_hook( __FILE__, 'wp_db_clean_deactivate_plugin_name' );
 
 /**
  * The core plugin class that is used to define internationalization,
