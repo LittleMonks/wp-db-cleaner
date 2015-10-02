@@ -52,7 +52,7 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		public function get_attachment_meta_duplicate( $count = false ) {
 			global $wpdb;
 
-			$select = ( $count ) ? 'COUNT(*)' : 'post_id,meta_key,meta_value';
+			$select = 'post_id,meta_key,meta_value';
 
 			$query = "SELECT $select
 							FROM {$wpdb->postmeta}
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 							HAVING (COUNT(post_id) > 1)";
 
 			if ( $count ) {
-				return $wpdb->get_var( $query );
+				return count($wpdb->get_var( $query ));
 			} else {
 				return $wpdb->get_results( $query );
 			}
@@ -257,13 +257,13 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 if ( ! function_exists( 'lm_dbc_duplicate_ui' ) ) {
 	function lm_dbc_duplicate_ui() {
 		global $duplicate_data;
+		$myListTable = new Wp_Db_Cleaner_List(Wp_Duplicate_Data::get_array(), admin_url( 'tools.php?page=db-clean&subpage=2' ), $duplicate_data );
+		$myListTable->views();
 		?>
-		<div class="lm-dbc-sidebar">
-			<?php lm_dbc_jarvis_give_me_tabs( Wp_Duplicate_Data::get_array(), admin_url( 'tools.php?page=db-clean&subpage=2' ), $duplicate_data ); ?>
-		</div>
 		<div class="lm-dbc-table">
-			<?php $table = lm_dbc_get_table_content();
-			lm_dbc_print_table( $table );
+			<?php
+			$myListTable->prepare_items();
+			$myListTable->display();
 			?>
 		</div>
 

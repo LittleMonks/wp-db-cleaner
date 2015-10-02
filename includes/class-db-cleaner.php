@@ -79,6 +79,7 @@ class Db_Cleaner {
 		// include classes
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/classes/class-wp-orphan-data.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/classes/class-wp-duplicate-data.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/classes/class-wp-db-cleaner-list.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/helper.php';
 
 	}
