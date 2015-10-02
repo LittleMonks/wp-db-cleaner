@@ -189,15 +189,27 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		 *
 		 * @param bool|false $count
 		 *
+		 * @param int $offset
+		 * @param int $limit
+		 *
 		 * @return array|null|object|string
 		 */
-		public function get_wp_transients( $count = false ) {
+		public function get_wp_transients( $count = false, $offset = 0, $limit = 0 ) {
 			global $wpdb;
-
 			$select = ( $count ) ? 'COUNT(*)' : '*';
+			if ( !$count && $offset ){
+				$offset = ' OFFSET '.$offset;
+			} else {
+				$offset = '';
+			}
+			if (!$count && $limit){
+				$limit = ' LIMIT '.$limit;
+			} else {
+				$limit = '';
+			}
 
 			$query = "SELECT $select FROM {$wpdb->options}
-										WHERE option_name LIKE '%\_transient\_%'";
+										WHERE option_name LIKE '%\_transient\_%' $limit $offset";
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );

@@ -17,6 +17,9 @@ if ( ! class_exists( 'Wp_Db_Cleaner_List' ) ) {
 		var $tab_array;
 		var $url;
 		var $obj_data;
+		var $total_item;
+
+		static $limit = 10;
 
 		/**
 		 * Wp_Db_Cleaner_List constructor.
@@ -33,7 +36,6 @@ if ( ! class_exists( 'Wp_Db_Cleaner_List' ) ) {
 					'ajax'     => false
 				) );
 			}
-			$this->items = lm_dbc_get_table_content();
 		}
 
 		function get_columns() {
@@ -58,11 +60,17 @@ if ( ! class_exists( 'Wp_Db_Cleaner_List' ) ) {
 			}
 			foreach ( $this->tab_array as $key => $val ) {
 				$url           = esc_url( $this->url . '&tab=' . $key );
-				$count         = '<span class="count">(' . call_user_func_array( array(
-						$this->obj_data,
-						$key
-					), array( true ) ) . ')</span>';
-				$views[ $key ] = "<a " . lm_dbc_is_active_tab( $key, 'class="current"', $first_selected, false ) . " href='$url'>$val $count</a>";
+
+				$count_n = call_user_func_array( array(
+					$this->obj_data,
+					$key
+				), array( true ) );
+				$_is_current = lm_dbc_is_active_tab( $key, 'class="current"', $first_selected, false );
+				if (!empty($_is_current)){
+					$this->total_item = $count_n;
+				}
+				$count         = '<span class="count">(' . $count_n . ')</span>';
+				$views[ $key ] = "<a " . $_is_current . " href='$url'>$val $count</a>";
 				if ( $first_selected ) {
 					$first_selected = false;
 				}
@@ -94,7 +102,15 @@ if ( ! class_exists( 'Wp_Db_Cleaner_List' ) ) {
 		}
 
 		public function prepare_items() {
+			$this->items = lm_dbc_get_table_content();
 			$this->_column_headers = array( $this->get_columns(), array(), array() );
+			$total_pages = ceil( $this->total_item / self::$limit );
+
+			$this->set_pagination_args( array(
+				'total_items' => $this->total_item,
+				'total_pages' => $total_pages,
+				'per_page' => self::$limit
+			) );
 		}
 
 		/**

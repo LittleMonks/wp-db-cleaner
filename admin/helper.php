@@ -37,11 +37,13 @@ if ( ! function_exists( 'lm_dbc_jarvis_give_me_tabs' ) ) {
 if ( ! function_exists( 'lm_dbc_is_active_tab' ) ) {
 	function lm_dbc_is_active_tab( $value, $data, $first_selected, $echo = true ) {
 		if ( ( ! isset( $_REQUEST['tab'] ) && $first_selected ) || ( ! empty( $_REQUEST['tab'] ) && $_REQUEST['tab'] == $value ) ) {
-			if ($echo){
+			if ( $echo ) {
 				echo $data;
 			}
+
 			return $data;
 		}
+
 		return '';
 	}
 }
@@ -52,21 +54,29 @@ if ( ! function_exists( 'lm_dbc_get_table_content' ) ) {
 		$result          = null;
 		$orphan_array    = Wp_Orphan_Data::get_array();
 		$duplicate_array = Wp_Duplicate_Data::get_array();
+
 		if ( ! isset( $_REQUEST['tab'] ) ) {
 			if ( ! isset( $_REQUEST['subpage'] ) ) {
 				$key    = reset( $orphan_array );
-				$result = call_user_func_array( array( $orphan_data, $orphan_array[ $key ] ), array( false ) );
+				$result = array( $orphan_data, $orphan_array[ $key ] );
 			} else {
 				$key    = reset( $duplicate_array );
-				$result = call_user_func_array( array( $duplicate_data, $duplicate_array[ $key ] ), array( false ) );
+				$result = array( $duplicate_data, $duplicate_array[ $key ] );
 			}
 		} else {
 			$key = $_REQUEST['tab'];
 			if ( isset( $orphan_array[ $key ] ) ) {
-				$result = call_user_func_array( array( $orphan_data, $key ), array( false ) );
+				$result = array( $orphan_data, $key );
 			} else if ( isset( $duplicate_array[ $key ] ) ) {
-				$result = call_user_func_array( array( $duplicate_data, $key ), array( false ) );
+				$result = array( $duplicate_data, $key );
 			}
+		}
+		if ( ! empty( $result ) ) {
+			if (isset( $_REQUEST['paged'] )){
+				$page = intval( $_REQUEST['paged']) * Wp_Db_Cleaner_List::$limit;
+				return call_user_func_array( $result, array( false, $page - Wp_Db_Cleaner_List::$limit, $page ) );
+			}
+			return call_user_func_array( $result, array( false ) );
 		}
 
 		return $result;
@@ -118,8 +128,9 @@ if ( ! function_exists( 'lm_dbc_jarvis_give_me_subsubsub' ) ) {
 				?>
 				<li class="all">
 					<a href="<?php echo esc_url( $url . '&tab=' . $key ); ?>" <?php lm_dbc_is_active_tab( $key, 'class="current"', $first_selected ); ?>>
-						<?php _e($val); ?>
-						<span class="count">(<?php echo call_user_func_array( array( $obj, $key ), array( true ) ) ?>)</span>
+						<?php _e( $val ); ?>
+						<span class="count">(<?php echo call_user_func_array( array( $obj, $key ), array( true ) ) ?>
+							)</span>
 					</a> |
 				</li>
 				<?php
