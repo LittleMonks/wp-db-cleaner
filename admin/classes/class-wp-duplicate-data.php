@@ -256,9 +256,10 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 if ( ! function_exists( 'lm_dbc_duplicate_ui' ) ) {
 	function lm_dbc_duplicate_ui() {
+		global $duplicate_data;
 		?>
 		<div class="lm-dbc-sidebar">
-			<?php lm_dbc_jarvis_give_me_tabs( Wp_Duplicate_Data::get_array(), admin_url( 'tools.php?page=db-clean&subpage=2' ) ); ?>
+			<?php lm_dbc_jarvis_give_me_tabs( Wp_Duplicate_Data::get_array(), admin_url( 'tools.php?page=db-clean&subpage=2' ), $duplicate_data ); ?>
 		</div>
 		<div class="lm-dbc-table">
 			<?php $table = lm_dbc_get_table_content();

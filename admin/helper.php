@@ -8,7 +8,7 @@
 
 
 if ( ! function_exists( 'lm_dbc_jarvis_give_me_tabs' ) ) {
-	function lm_dbc_jarvis_give_me_tabs( $tab_array, $url ) {
+	function lm_dbc_jarvis_give_me_tabs( $tab_array, $url, $obj ) {
 		if ( empty( $tab_array ) ) {
 			return;
 		}
@@ -22,7 +22,7 @@ if ( ! function_exists( 'lm_dbc_jarvis_give_me_tabs' ) ) {
 			foreach ( $tab_array as $key => $val ) {
 				?>
 				<a class="nav-tab <?php lm_dbc_is_active_tab( $val, 'nav-tab-active', $first_selected ); ?>"
-				   href="<?php echo esc_url( $url . '&tab=' . $val ); ?>"><?php echo $key; ?></a>
+				   href="<?php echo esc_url( $url . '&tab=' . $val ); ?>"><?php echo $key; ?> (<?php echo call_user_func_array(array($obj,$val ), array(true)) ?>)</a>
 				<?php
 				if ( $first_selected ) {
 					$first_selected = false;
