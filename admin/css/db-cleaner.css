@@ -37,3 +37,7 @@
 	display: block;
 	margin: 5px 0;
 }
+
+table.lm_dbc_table{
+	table-layout: fixed !important;
+}

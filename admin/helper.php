@@ -74,7 +74,7 @@ if ( ! function_exists( 'lm_dbc_print_table' ) ) {
 	function lm_dbc_print_table( $table ) {
 		if ( ! empty( $table ) ) {
 			$first = $table[0]; ?>
-			<table class="lm_dbc__table wp-list-table widefat fixed striped">
+			<table class="lm_dbc_table wp-list-table widefat fixed striped">
 				<thead>
 				<tr>
 					<?php foreach ( $first as $key => $val ) { ?>
@@ -87,7 +87,7 @@ if ( ! function_exists( 'lm_dbc_print_table' ) ) {
 				<?php foreach ( $table as $row ) { ?>
 				<tr>
 					<?php foreach ( $row as $key => $val ) { ?>
-						<td><?php echo $val; ?></td>
+						<td><?php echo esc_attr( $val ); ?></td>
 					<?php }
 					echo '</tr>';
 					} ?>
