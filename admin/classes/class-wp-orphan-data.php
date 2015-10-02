@@ -173,3 +173,11 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 	}
 
 }
+
+if ( !function_exists('lm_dbc_orphan_ui') ) {
+	function lm_dbc_orphan_ui(){
+		?>
+		<h1>Orhpan tab</h1>
+	<?php
+	}
+}

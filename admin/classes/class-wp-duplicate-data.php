@@ -241,3 +241,13 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 	}
 
 }
+
+
+if ( !function_exists('lm_dbc_duplicate_ui') ) {
+	function lm_dbc_duplicate_ui(){
+		?>
+		<h1>Duplicate tab</h1>
+		<?php
+	}
+}
+

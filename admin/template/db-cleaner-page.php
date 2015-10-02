@@ -26,12 +26,10 @@
 	</h2>
 
 	<?php
-	if ( ! isset( $_REQUEST['subpage'] ) ) { ?>
-		<h1>Orhpan tab</h1>
-		<?php
-	} else { ?>
-		<h1>Duplicate tab</h1>
-		<?php
+	if ( ! isset( $_REQUEST['subpage'] ) ) {
+		lm_dbc_orphan_ui();
+	} else {
+		lm_dbc_duplicate_ui();
 	}
 	?>
 </div>
