@@ -15,7 +15,7 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div class='wrap'>
-
+<div class="lm-dbc-header">
 	<h2 class="nav-tab-wrapper">
 		<a href="<?php echo esc_url( admin_url( 'tools.php?page=db-clean' ) ); ?>"
 		   class="nav-tab <?php echo ( ! isset( $_REQUEST['subpage'] ) ) ? 'nav-tab-active' : ''; ?>">Find/Remove Orphan
@@ -24,7 +24,8 @@
 		   class="nav-tab <?php echo isset( $_REQUEST['subpage'] ) ? 'nav-tab-active' : ''; ?>">Find/Remove Duplicate
 			Data</a>
 	</h2>
-
+</div>
+	<div class="lm-dbc-content">
 	<?php
 	if ( ! isset( $_REQUEST['subpage'] ) ) {
 		lm_dbc_orphan_ui();
@@ -32,4 +33,5 @@
 		lm_dbc_duplicate_ui();
 	}
 	?>
+	</div>
 </div>

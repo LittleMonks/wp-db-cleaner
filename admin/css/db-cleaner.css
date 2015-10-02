@@ -2,3 +2,38 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+/* Main */
+.lm-dbc-content {
+	padding: 10px;
+}
+
+.lm-dbc-sidebar {
+	float: left;
+	width: 20%;
+}
+
+/* Content */
+
+.lm-dbc-support {
+	float: right;
+	width: 20%;
+}
+
+.lm-dbc-table {
+	display: inline-block;
+	width: 60%;
+
+}
+
+
+/* Sidebar */
+.lm-dbc-sidebar h3.nav-tab-wrapper {
+	padding: 0 5px;
+	border-bottom: none;
+}
+
+.lm-dbc-sidebar h3 a.nav-tab {
+	display: block;
+	margin: 5px 0;
+}

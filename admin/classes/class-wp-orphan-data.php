@@ -32,6 +32,12 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		}
 
+		public static function get_array(){
+			return  array(
+				'Tab name' => 'get_function'
+			);
+		}
+
 		/**
 		 * Get all orphan data from wp_posts table
 		 *
@@ -45,7 +51,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)" );
+			$query = ( "SELECT $select FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)" );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -68,7 +74,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->postmeta} meta LEFT JOIN {$wpdb->posts} posts ON (meta.post_id = posts.ID) WHERE (posts.ID IS NULL)" );
+			$query = ( "SELECT $select FROM {$wpdb->postmeta} meta LEFT JOIN {$wpdb->posts} posts ON (meta.post_id = posts.ID) WHERE (posts.ID IS NULL)" );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -91,7 +97,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->term_taxonomy} taxonomy LEFT JOIN {$wpdb->terms} terms ON (taxonomy.term_id = terms.term_id) WHERE (terms.term_id IS NULL)" );
+			$query = ( "SELECT $select FROM {$wpdb->term_taxonomy} taxonomy LEFT JOIN {$wpdb->terms} terms ON (taxonomy.term_id = terms.term_id) WHERE (terms.term_id IS NULL)" );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -114,7 +120,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->term_relationships} relationships LEFT JOIN {$wpdb->term_taxonomy} taxonomy ON (relationships.term_taxonomy_id = taxonomy.term_taxonomy_id) WHERE (taxonomy.term_taxonomy_id IS NULL)" );
+			$query = ( "SELECT $select FROM {$wpdb->term_relationships} relationships LEFT JOIN {$wpdb->term_taxonomy} taxonomy ON (relationships.term_taxonomy_id = taxonomy.term_taxonomy_id) WHERE (taxonomy.term_taxonomy_id IS NULL)" );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -137,7 +143,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->usermeta} usermeta LEFT JOIN {$wpdb->users} users ON (usermeta.user_id = users.ID) WHERE (users.ID IS NULL)" );
+			$query = ( "SELECT $select FROM {$wpdb->usermeta} usermeta LEFT JOIN {$wpdb->users} users ON (usermeta.user_id = users.ID) WHERE (users.ID IS NULL)" );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -160,7 +166,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->users} users ON (posts.post_author = users.ID) WHERE (users.ID IS NULL)" );
+			$query = ( "SELECT $select FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->users} users ON (posts.post_author = users.ID) WHERE (users.ID IS NULL)" );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );

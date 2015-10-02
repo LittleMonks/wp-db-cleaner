@@ -31,6 +31,17 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 		}
 
+		public static function get_array() {
+			return array(
+				'Attachment Meta'         => 'get_attachment_meta_duplicate',
+				'Post Meta'               => 'get_post_meta_duplicate',
+				'Missing Attachment Meta' => 'get_missing_attachment_meta',
+				'Post Meta Locks'         => 'get_post_meta_locks',
+				'Transients'              => 'get_wp_transients',
+				'Post Revisions'          => 'get_post_revisions',
+			);
+		}
+
 		/**
 		 * Checking for dupe _wp_attached_file / _wp_attachment_metadata keys (should only ever be one each per attachment post type).
 		 *
@@ -43,11 +54,11 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : 'post_id,meta_key,meta_value';
 
-			$query = $wpdb->prepare( "SELECT $select
+			$query = "SELECT $select
 							FROM {$wpdb->postmeta}
 							WHERE (meta_key IN('_wp_attached_file','_wp_attachment_metadata'))
 							GROUP BY post_id,meta_key
-							HAVING (COUNT(post_id) > 1)" );
+							HAVING (COUNT(post_id) > 1)";
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -58,11 +69,11 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 		public function delete_attachment_meta_duplicate() {
 			global $wpdb;
-			$query = $wpdb->prepare( "DELETE
+			$query = "DELETE
 							FROM {$wpdb->postmeta}
 							WHERE (meta_key IN('_wp_attached_file','_wp_attachment_metadata'))
 							GROUP BY post_id,meta_key
-							HAVING (COUNT(post_id) > 1)" );
+							HAVING (COUNT(post_id) > 1)";
 
 			return $wpdb->query( $query );
 		}
@@ -77,10 +88,10 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		public function get_post_meta_duplicate( $count = false ) {
 			global $wpdb;
 
-			$query = $wpdb->prepare( "SELECT *,COUNT(*) AS keycount
+			$query = "SELECT *,COUNT(*) AS keycount
 										FROM {$wpdb->postmeta}
 										GROUP BY post_id,meta_key
-										HAVING (COUNT(*) > 1)" );
+										HAVING (COUNT(*) > 1)";
 
 			if ( $count ) {
 				return count( $wpdb->get_results( $query ) );
@@ -89,9 +100,9 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 			}
 		}
 
-		public function delete_duplicate_meta() {
+		public function delete_post_meta_duplicate() {
 			global $wpdb;
-			$query = $wpdb->prepare( "DELETE FROM {$wpdb->postmeta}
+			$query = "DELETE FROM {$wpdb->postmeta}
 										WHERE (meta_id IN (
 										    SELECT * FROM (
 										        SELECT meta_id
@@ -99,7 +110,7 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 										        GROUP BY post_id,meta_key
 										        HAVING (COUNT(*) > 1)
 										    ) AS tmp
-										))" );
+										))";
 
 			return $wpdb->query( $query );
 		}
@@ -116,12 +127,12 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->posts} posts
+			$query = "SELECT $select FROM {$wpdb->posts} posts
 										LEFT JOIN {$wpdb->postmeta} postmeta ON (
 										    (posts.ID = postmeta.post_id) AND
 										    ((postmeta.meta_key = '_wp_attached_file') OR postmeta.meta_key = '_wp_attachment_metadata')
 										)
-										WHERE (posts.post_type = 'attachment') AND (postmeta.meta_id IS NULL)" );
+										WHERE (posts.post_type = 'attachment') AND (postmeta.meta_id IS NULL)";
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -130,14 +141,14 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 			}
 		}
 
-		public function delete_missing_attachment() {
+		public function delete_missing_attachment_meta() {
 			global $wpdb;
-			$query = $wpdb->prepare( "DELETE posts.* FROM {$wpdb->posts} posts
+			$query = "DELETE posts.* FROM {$wpdb->posts} posts
 										LEFT JOIN {$wpdb->postmeta} postmeta ON (
 										    (posts.ID = postmeta.post_id) AND
 										    ((postmeta.meta_key = '_wp_attached_file') OR postmeta.meta_key = '_wp_attachment_metadata')
 										)
-										WHERE (posts.post_type = 'attachment') AND (postmeta.meta_id IS NULL)" );
+										WHERE (posts.post_type = 'attachment') AND (postmeta.meta_id IS NULL)";
 
 			return $wpdb->query( $query );
 		}
@@ -155,8 +166,8 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->postmeta}
-										WHERE meta_key IN ('_edit_lock','_edit_last')" );
+			$query = "SELECT $select FROM {$wpdb->postmeta}
+										WHERE meta_key IN ('_edit_lock','_edit_last')";
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -167,8 +178,8 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 		public function delete_post_meta_locks() {
 			global $wpdb;
-			$query = $wpdb->prepare( "DELETE FROM {$wpdb->postmeta}
-										WHERE meta_key IN ('_edit_lock','_edit_last')" );
+			$query = "DELETE FROM {$wpdb->postmeta}
+										WHERE meta_key IN ('_edit_lock','_edit_last')";
 
 			return $wpdb->query( $query );
 		}
@@ -185,8 +196,8 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->options}
-										WHERE option_name LIKE '%\_transient\_%'" );
+			$query = "SELECT $select FROM {$wpdb->options}
+										WHERE option_name LIKE '%\_transient\_%'";
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -195,10 +206,10 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 			}
 		}
 
-		public function delete_transients() {
+		public function delete_wp_transients() {
 			global $wpdb;
-			$query = $wpdb->prepare( "DELETE FROM {$wpdb->options}
-										WHERE option_name LIKE '%\_transient\_%'" );
+			$query = "DELETE FROM {$wpdb->options}
+										WHERE option_name LIKE '%\_transient\_%'";
 
 			return $wpdb->query( $query );
 		}
@@ -215,11 +226,11 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
-			$query = $wpdb->prepare( "SELECT $select FROM {$wpdb->posts}
+			$query = "SELECT $select FROM {$wpdb->posts}
 										WHERE
 										    (post_type = 'revision') AND
 										    (post_modified_gmt < DATE_SUB(NOW(),INTERVAL 15 DAY))
-										ORDER BY post_modified_gmt DESC" );
+										ORDER BY post_modified_gmt DESC";
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -228,12 +239,12 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 			}
 		}
 
-		public function delete_reversion() {
+		public function delete_post_revisions() {
 			global $wpdb;
-			$query = $wpdb->prepare( "DELETE FROM {$wpdb->posts}
+			$query = "DELETE FROM {$wpdb->posts}
 											WHERE
 											    (post_type = 'revision') AND
-											    (post_modified_gmt < DATE_SUB(NOW(),INTERVAL 15 DAY))" );
+											    (post_modified_gmt < DATE_SUB(NOW(),INTERVAL 15 DAY))";
 
 			return $wpdb->query( $query );
 		}
@@ -243,10 +254,22 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 }
 
 
-if ( !function_exists('lm_dbc_duplicate_ui') ) {
-	function lm_dbc_duplicate_ui(){
+if ( ! function_exists( 'lm_dbc_duplicate_ui' ) ) {
+	function lm_dbc_duplicate_ui() {
 		?>
-		<h1>Duplicate tab</h1>
+		<div class="lm-dbc-sidebar">
+			<?php lm_dbc_jarvis_give_me_tabs( Wp_Duplicate_Data::get_array(), admin_url( 'tools.php?page=db-clean&subpage=2' ) ); ?>
+		</div>
+		<div class="lm-dbc-table">
+			<?php $table = lm_dbc_get_table_content();
+			lm_dbc_print_table($table);
+			?>
+		</div>
+
+		<div class="lm-dbc-support">
+			Support us
+		</div>
+
 		<?php
 	}
 }
