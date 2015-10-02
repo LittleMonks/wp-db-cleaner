@@ -34,7 +34,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		public static function get_array(){
 			return  array(
-				'Tab name' => 'get_function'
+			'get_function' => 'Tab name',
 			);
 		}
 

@@ -21,8 +21,9 @@ if ( ! function_exists( 'lm_dbc_jarvis_give_me_tabs' ) ) {
 			}
 			foreach ( $tab_array as $key => $val ) {
 				?>
-				<a class="nav-tab <?php lm_dbc_is_active_tab( $val, 'nav-tab-active', $first_selected ); ?>"
-				   href="<?php echo esc_url( $url . '&tab=' . $val ); ?>"><?php echo $key; ?> (<?php echo call_user_func_array(array($obj,$val ), array(true)) ?>)</a>
+				<a class="nav-tab <?php lm_dbc_is_active_tab( $key, 'nav-tab-active', $first_selected ); ?>"
+				   href="<?php echo esc_url( $url . '&tab=' . $key ); ?>"><?php echo $val; ?>
+					(<?php echo call_user_func_array( array( $obj, $key ), array( true ) ) ?>)</a>
 				<?php
 				if ( $first_selected ) {
 					$first_selected = false;
@@ -51,16 +52,16 @@ if ( ! function_exists( 'lm_dbc_get_table_content' ) ) {
 		if ( ! isset( $_REQUEST['tab'] ) ) {
 			if ( ! isset( $_REQUEST['subpage'] ) ) {
 				$key    = reset( $orphan_array );
-				$result = call_user_func_array( array( $orphan_data, $key ), array( false ) );
+				$result = call_user_func_array( array( $orphan_data, $orphan_array[ $key ] ), array( false ) );
 			} else {
 				$key    = reset( $duplicate_array );
-				$result = call_user_func_array( array( $duplicate_data, $key ), array( false ) );
+				$result = call_user_func_array( array( $duplicate_data, $duplicate_array[ $key ] ), array( false ) );
 			}
 		} else {
 			$key = $_REQUEST['tab'];
-			if ( array_search( $key, $orphan_array ) ) {
+			if ( isset( $orphan_array[ $key ] ) ) {
 				$result = call_user_func_array( array( $orphan_data, $key ), array( false ) );
-			} else if ( array_search( $key, $duplicate_array ) ) {
+			} else if ( isset( $duplicate_array[ $key ] ) ) {
 				$result = call_user_func_array( array( $duplicate_data, $key ), array( false ) );
 			}
 		}
@@ -93,7 +94,7 @@ if ( ! function_exists( 'lm_dbc_print_table' ) ) {
 					} ?>
 				</tbody>
 			</table>
-		<?php
+			<?php
 		}
 	}
 }

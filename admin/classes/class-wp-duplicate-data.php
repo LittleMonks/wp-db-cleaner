@@ -33,12 +33,12 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 		public static function get_array() {
 			return array(
-				'Attachment Meta'         => 'get_attachment_meta_duplicate',
-				'Post Meta'               => 'get_post_meta_duplicate',
-				'Missing Attachment Meta' => 'get_missing_attachment_meta',
-				'Post Meta Locks'         => 'get_post_meta_locks',
-				'Transients'              => 'get_wp_transients',
-				'Post Revisions'          => 'get_post_revisions',
+				'get_attachment_meta_duplicate' => 'Attachment Meta',
+				'get_post_meta_duplicate'       => 'Post Meta',
+				'get_missing_attachment_meta'   => 'Missing Attachment Meta',
+				'get_post_meta_locks'           => 'Post Meta Locks',
+				'get_wp_transients'             => 'Transients',
+				'get_post_revisions'            => 'Post Revisions',
 			);
 		}
 
@@ -263,7 +263,7 @@ if ( ! function_exists( 'lm_dbc_duplicate_ui' ) ) {
 		</div>
 		<div class="lm-dbc-table">
 			<?php $table = lm_dbc_get_table_content();
-			lm_dbc_print_table($table);
+			lm_dbc_print_table( $table );
 			?>
 		</div>
 
