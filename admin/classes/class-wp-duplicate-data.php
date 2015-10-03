@@ -47,9 +47,12 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		 *
 		 * @param bool|false $count
 		 *
+		 * @param int $offset
+		 * @param int $limit
+		 *
 		 * @return array|null|object|string
 		 */
-		public function get_attachment_meta_duplicate( $count = false ) {
+		public function get_attachment_meta_duplicate( $count = false, $offset = 0, $limit = 0 ) {
 			global $wpdb;
 
 			$select = 'post_id,meta_key,meta_value';
@@ -60,8 +63,10 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 							GROUP BY post_id,meta_key
 							HAVING (COUNT(post_id) > 1)";
 
+			$query = __dbc_pagination( $query, $count, $offset, $limit );
+
 			if ( $count ) {
-				return count($wpdb->get_var( $query ));
+				return count( $wpdb->get_var( $query ) );
 			} else {
 				return $wpdb->get_results( $query );
 			}
@@ -83,15 +88,20 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		 *
 		 * @param bool|false $count
 		 *
+		 * @param int $offset
+		 * @param int $limit
+		 *
 		 * @return array|int|null|object
 		 */
-		public function get_post_meta_duplicate( $count = false ) {
+		public function get_post_meta_duplicate( $count = false, $offset = 0, $limit = 0 ) {
 			global $wpdb;
 
 			$query = "SELECT *,COUNT(*) AS keycount
 										FROM {$wpdb->postmeta}
 										GROUP BY post_id,meta_key
 										HAVING (COUNT(*) > 1)";
+
+			$query = __dbc_pagination( $query, $count, $offset, $limit );
 
 			if ( $count ) {
 				return count( $wpdb->get_results( $query ) );
@@ -120,9 +130,12 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		 *
 		 * @param bool|false $count
 		 *
+		 * @param int $offset
+		 * @param int $limit
+		 *
 		 * @return array|null|object|string
 		 */
-		public function get_missing_attachment_meta( $count = false ) {
+		public function get_missing_attachment_meta( $count = false, $offset = 0, $limit = 0 ) {
 			global $wpdb;
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
@@ -133,6 +146,7 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 										    ((postmeta.meta_key = '_wp_attached_file') OR postmeta.meta_key = '_wp_attachment_metadata')
 										)
 										WHERE (posts.post_type = 'attachment') AND (postmeta.meta_id IS NULL)";
+			$query = __dbc_pagination( $query, $count, $offset, $limit );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -159,15 +173,19 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		 *
 		 * @param bool|false $count
 		 *
+		 * @param int $offset
+		 * @param int $limit
+		 *
 		 * @return array|null|object|string
 		 */
-		public function get_post_meta_locks( $count = false ) {
+		public function get_post_meta_locks( $count = false, $offset = 0, $limit = 0 ) {
 			global $wpdb;
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
 			$query = "SELECT $select FROM {$wpdb->postmeta}
 										WHERE meta_key IN ('_edit_lock','_edit_last')";
+			$query = __dbc_pagination( $query, $count, $offset, $limit );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -197,20 +215,10 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		public function get_wp_transients( $count = false, $offset = 0, $limit = 0 ) {
 			global $wpdb;
 			$select = ( $count ) ? 'COUNT(*)' : '*';
-			if ( !$count && $offset ){
-				$offset = ' OFFSET '.$offset;
-			} else {
-				$offset = '';
-			}
-			if (!$count && $limit){
-				$limit = ' LIMIT '.$limit;
-			} else {
-				$limit = '';
-			}
 
 			$query = "SELECT $select FROM {$wpdb->options}
-										WHERE option_name LIKE '%\_transient\_%' $limit $offset";
-
+										WHERE option_name LIKE '%\_transient\_%'";
+			$query = __dbc_pagination( $query, $count, $offset, $limit );
 			if ( $count ) {
 				return $wpdb->get_var( $query );
 			} else {
@@ -231,9 +239,12 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 		 *
 		 * @param bool|false $count
 		 *
+		 * @param int $offset
+		 * @param int $limit
+		 *
 		 * @return array|null|object|string
 		 */
-		public function get_post_revisions( $count = false ) {
+		public function get_post_revisions( $count = false, $offset = 0, $limit = 0 ) {
 			global $wpdb;
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
@@ -243,6 +254,7 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 										    (post_type = 'revision') AND
 										    (post_modified_gmt < DATE_SUB(NOW(),INTERVAL 15 DAY))
 										ORDER BY post_modified_gmt DESC";
+			$query = __dbc_pagination( $query, $count, $offset, $limit );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -269,7 +281,7 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 if ( ! function_exists( 'lm_dbc_duplicate_ui' ) ) {
 	function lm_dbc_duplicate_ui() {
 		global $duplicate_data;
-		$myListTable = new Wp_Db_Cleaner_List(Wp_Duplicate_Data::get_array(), admin_url( 'tools.php?page=db-clean&subpage=2' ), $duplicate_data );
+		$myListTable = new Wp_Db_Cleaner_List( Wp_Duplicate_Data::get_array(), admin_url( 'tools.php?page=db-clean&subpage=2' ), $duplicate_data );
 		$myListTable->views();
 		?>
 		<div class="lm-dbc-table">
