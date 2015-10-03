@@ -33,12 +33,12 @@ if ( ! class_exists( 'Wp_Duplicate_Data' ) ) {
 
 		public static function get_array() {
 			return array(
-				'get_attachment_meta_duplicate' => 'Attachment Meta',
-				'get_post_meta_duplicate'       => 'Post Meta',
-				'get_missing_attachment_meta'   => 'Missing Attachment Meta',
-				'get_post_meta_locks'           => 'Post Meta Locks',
-				'get_wp_transients'             => 'Transients',
-				'get_post_revisions'            => 'Post Revisions',
+				'attachment_meta_duplicate' => 'Attachment Meta',
+				'post_meta_duplicate'       => 'Post Meta',
+				'missing_attachment_meta'   => 'Missing Attachment Meta',
+				'post_meta_locks'           => 'Post Meta Locks',
+				'wp_transients'             => 'Transients',
+				'post_revisions'            => 'Post Revisions',
 			);
 		}
 
@@ -289,10 +289,6 @@ if ( ! function_exists( 'lm_dbc_duplicate_ui' ) ) {
 			$myListTable->prepare_items();
 			$myListTable->display();
 			?>
-		</div>
-
-		<div class="lm-dbc-support">
-			Support us
 		</div>
 
 		<?php

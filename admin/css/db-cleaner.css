@@ -35,3 +35,7 @@
 table.lm_dbc_table{
 	table-layout: fixed !important;
 }
+
+.dbc_delete_action{
+	padding :10px;
+}

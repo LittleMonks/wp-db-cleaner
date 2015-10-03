@@ -49,6 +49,7 @@ if ( ! class_exists( 'Db_Cleaner_Admin' ) ) {
 		 * Load template file for function
 		 */
 		public function get_clean_ui() {
+			__dbc_delete_data();
 			require_once( plugin_dir_path( __FILE__ ) . '/template/db-cleaner-page.php' );
 		}
 
