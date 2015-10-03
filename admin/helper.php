@@ -45,30 +45,32 @@ if ( ! function_exists( 'lm_dbc_get_table_content' ) ) {
 			}
 		}
 		if ( ! empty( $result ) ) {
-			if (isset( $_REQUEST['paged'] )){
-				$page = intval( $_REQUEST['paged']) * Wp_Db_Cleaner_List::$limit;
-				var_dump($page);
+			if ( isset( $_REQUEST['paged'] ) ) {
+				$page = intval( $_REQUEST['paged'] ) * Wp_Db_Cleaner_List::$limit;
+
 				return call_user_func_array( $result, array( false, $page - Wp_Db_Cleaner_List::$limit, $page ) );
 			}
-			return call_user_func_array( $result, array( false, 0 ,Wp_Db_Cleaner_List::$limit ) );
+
+			return call_user_func_array( $result, array( false, 0, Wp_Db_Cleaner_List::$limit ) );
 		}
 
 		return $result;
 	}
 }
 
-if (! function_exists('__dbc_pagination')){
-	function __dbc_pagination( $query, $count, $offset, $limit ){
-		if ( !$count && is_numeric($offset) && $offset > 0 ){
-			$offset = ' OFFSET '.$offset;
+if ( ! function_exists( '__dbc_pagination' ) ) {
+	function __dbc_pagination( $query, $count, $offset, $limit ) {
+		if ( ! $count && is_numeric( $offset ) && $offset > 0 ) {
+			$offset = ' OFFSET ' . $offset;
 		} else {
 			$offset = '';
 		}
-		if (!$count && is_numeric($limit) && $limit > 0){
-			$limit = ' LIMIT '.$limit;
+		if ( ! $count && is_numeric( $limit ) && $limit > 0 ) {
+			$limit = ' LIMIT ' . $limit;
 		} else {
 			$limit = '';
 		}
+
 		return $query . $limit . $offset;
 	}
 }
