@@ -104,6 +104,19 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		}
 
 		/**
+		 * Delete wp_postmeta table orphan rows
+		 *
+		 * @return false|int
+		 */
+		public function delete_wp_postmeta_orhpan_rows() {
+
+			global $wpdb;
+			$query = "DELETE * FROM {$wpdb->postmeta} postmeta LEFT JOIN {$wpdb->posts} posts ON (postmeta.post_id = posts.ID) WHERE (posts.ID IS NULL)";
+			return $wpdb->query( $query );
+
+		}
+
+		/**
 		 * Get all orphan data from wp_term_taxonomy table
 		 *
 		 * @param bool|false $count
