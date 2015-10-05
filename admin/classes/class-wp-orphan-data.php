@@ -176,6 +176,19 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		}
 
 		/**
+		 * Delete wp_term_relationships table orphan rows
+		 *
+		 * @return false|int
+		 */
+		public function delete_wp_term_relationships_orphan_rows() {
+
+			global $wpdb;
+			$query = "DELETE FROM {$wpdb->term_relationships} term_relationships LEFT JOIN {$wpdb->term_taxonomy} term_taxonomy ON (term_relationships.term_taxonomy_id = term_taxonomy.term_taxonomy_id) WHERE (term_taxonomy.term_taxonomy_id IS NULL)";
+			return $wpdb->query( $query );
+
+		}
+
+		/**
 		 * Get all orphan data fro wp_usermeta table
 		 *
 		 * @param bool|false $count
