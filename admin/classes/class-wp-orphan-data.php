@@ -32,9 +32,9 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		}
 
-		public static function get_array(){
-			return  array(
-			'get_function' => 'Tab name',
+		public static function get_array() {
+			return array(
+				'wp_posts_orphan_rows' => 'WP Posts',
 			);
 		}
 
@@ -45,13 +45,15 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public function get_wp_posts_orphan_rows ( $count = false ) {
+		public function get_wp_posts_orphan_rows( $count = false, $offset = 0, $limit = 0 ) {
 
 			global $wpdb;
 
 			$select = ( $count ) ? 'COUNT(*)' : '*';
 
 			$query = ( "SELECT $select FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)" );
+
+			$query = __dbc_pagination( $query, $count, $offset, $limit );
 
 			if ( $count ) {
 				return $wpdb->get_var( $query );
@@ -68,7 +70,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public function get_wp_postmeta_orhpan_rows ( $count = false ) {
+		public function get_wp_postmeta_orhpan_rows( $count = false ) {
 
 			global $wpdb;
 
@@ -91,7 +93,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public function get_wp_term_taxonomy_orphan_rows ( $count = false ) {
+		public function get_wp_term_taxonomy_orphan_rows( $count = false ) {
 
 			global $wpdb;
 
@@ -114,7 +116,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public function get_wp_term_relationships_orphan_rows ( $count = false ) {
+		public function get_wp_term_relationships_orphan_rows( $count = false ) {
 
 			global $wpdb;
 
@@ -137,7 +139,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public function get_wp_usermeta_orphan_rows ( $count = false ) {
+		public function get_wp_usermeta_orphan_rows( $count = false ) {
 
 			global $wpdb;
 
@@ -160,7 +162,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public function get_wp_posts_author_orphan_rows ( $count = false ) {
+		public function get_wp_posts_author_orphan_rows( $count = false ) {
 
 			global $wpdb;
 
@@ -180,10 +182,19 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 }
 
-if ( !function_exists('lm_dbc_orphan_ui') ) {
-	function lm_dbc_orphan_ui(){
+if ( ! function_exists( 'lm_dbc_orphan_ui' ) ) {
+	function lm_dbc_orphan_ui() {
+		global $orphan_data;
+		$myListTable = new Wp_Db_Cleaner_List( Wp_Orphan_Data::get_array(), admin_url( 'tools.php?page=db-clean' ), $orphan_data );
+		$myListTable->views();
 		?>
-		<h1>Orhpan tab</h1>
-	<?php
+		<div class="lm-dbc-table">
+			<?php
+			$myListTable->prepare_items();
+			$myListTable->display();
+			?>
+		</div>
+
+		<?php
 	}
 }
