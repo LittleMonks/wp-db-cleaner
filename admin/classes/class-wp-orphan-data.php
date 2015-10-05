@@ -247,6 +247,19 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		}
 
+		/**
+		 * Delete wp_posts author table orphan rows
+		 *
+		 * @return false|int
+		 */
+		public function delete_wp_posts_author_orphan_rows() {
+
+			global $wpdb;
+			$query = "DELETE FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->users} users ON (posts.post_author = users.ID) WHERE (users.ID IS NULL)";
+			return $wpdb->query( $query );
+
+		}
+
 	}
 
 }
