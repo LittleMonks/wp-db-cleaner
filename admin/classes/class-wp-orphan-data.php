@@ -34,12 +34,12 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 		public static function get_array() {
 			return array(
-				'wp_posts_orphan_rows' => 'WP Posts',
-				'wp_postmeta_orhpan_rows' => 'WP Postmeta',
-				'wp_term_taxonomy_orphan_rows' => 'WP Term Taxonomy',
+				'wp_posts_orphan_rows'              => 'WP Posts',
+				'wp_postmeta_orhpan_rows'           => 'WP Postmeta',
+				'wp_term_taxonomy_orphan_rows'      => 'WP Term Taxonomy',
 				'wp_term_relationships_orphan_rows' => 'WP Term Taxonomy Relationships',
-				'wp_usermeta_orphan_rows' => 'WP Usermeta',
-				'wp_posts_author_orphan_rows' => 'WP Posts Author',
+				'wp_usermeta_orphan_rows'           => 'WP Usermeta',
+				'wp_posts_author_orphan_rows'       => 'WP Posts Author',
 			);
 		}
 
