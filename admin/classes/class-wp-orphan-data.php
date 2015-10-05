@@ -49,12 +49,11 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 			global $wpdb;
 
-			$select = ( $count ) ? 'COUNT(*)' : '*';
+			$select = ( $count ) ? 'COUNT(*)' : 'posts.*';
 
 			$query = ( "SELECT $select FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)" );
 
 			$query = __dbc_pagination( $query, $count, $offset, $limit );
-
 			if ( $count ) {
 				return $wpdb->get_var( $query );
 			} else {
