@@ -75,7 +75,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		public function delete_wp_posts_orphan_rows() {
 
 			global $wpdb;
-			$query = "DELETE * FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)";
+			$query = "DELETE FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)";
 			return $wpdb->query( $query );
 
 		}
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		public function delete_wp_postmeta_orhpan_rows() {
 
 			global $wpdb;
-			$query = "DELETE * FROM {$wpdb->postmeta} postmeta LEFT JOIN {$wpdb->posts} posts ON (postmeta.post_id = posts.ID) WHERE (posts.ID IS NULL)";
+			$query = "DELETE FROM {$wpdb->postmeta} postmeta LEFT JOIN {$wpdb->posts} posts ON (postmeta.post_id = posts.ID) WHERE (posts.ID IS NULL)";
 			return $wpdb->query( $query );
 
 		}
@@ -136,6 +136,19 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 			} else {
 				return $wpdb->get_results( $query );
 			}
+
+		}
+
+		/**
+		 * Delete wp_term_taxonomy table orphan rows
+		 *
+		 * @return false|int
+		 */
+		public function delete_wp_term_taxonomy_orphan_rows() {
+
+			global $wpdb;
+			$query = "DELETE FROM {$wpdb->term_taxonomy} term_taxonomy LEFT JOIN {$wpdb->terms} terms ON (term_taxonomy.term_id = terms.term_id) WHERE (terms.term_id IS NULL)";
+			return $wpdb->query( $query );
 
 		}
 
