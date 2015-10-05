@@ -212,6 +212,19 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		}
 
 		/**
+		 * Delete wp_usermeta table orphan rows
+		 *
+		 * @return false|int
+		 */
+		public function delete_wp_usermeta_orphan_rows() {
+
+			global $wpdb;
+			$query = "DELETE FROM {$wpdb->usermeta} usermeta LEFT JOIN {$wpdb->users} users ON (usermeta.user_id = users.ID) WHERE (users.ID IS NULL)";
+			return $wpdb->query( $query );
+
+		}
+
+		/**
 		 * Get all orphan data fro wp_posts table with no author id
 		 *
 		 * @param bool|false $count
