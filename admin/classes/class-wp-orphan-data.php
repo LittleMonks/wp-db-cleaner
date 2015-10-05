@@ -68,6 +68,19 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		}
 
 		/**
+		 * Delete wp_posts table orphan rows
+		 *
+		 * @return false|int
+		 */
+		public function delete_wp_posts_orphan_rows() {
+
+			global $wpdb;
+			$query = "DELETE * FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)";
+			return $wpdb->query( $query );
+
+		}
+
+		/**
 		 * Get all orphan data fro wp_postmeta table
 		 *
 		 * @param bool|false $count
