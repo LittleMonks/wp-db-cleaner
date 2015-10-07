@@ -236,7 +236,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 
 			global $wpdb;
 
-			$select = ( $count ) ? 'COUNT(*)' : '*';
+			$select = ( $count ) ? 'COUNT(*)' : 'posts.post_title, posts.post_status, posts.post_type, posts.comment_count, posts.post_author, posts.post_date';
 
 			$query = ( "SELECT $select FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->users} users ON (posts.post_author = users.ID) WHERE (users.ID IS NULL)" );
 
