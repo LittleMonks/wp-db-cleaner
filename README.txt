@@ -1,7 +1,7 @@
 === Plugin Name ===
-Contributors: utkarshpatel, mehulkaklotar
+Contributors: mehulkaklotar, utkarshpatel
 Tags: wp clean, database, db, clean, cleaner
-Requires at least: 3.0.1
+Requires at least: 4.0
 Tested up to: 4.4
 Stable tag: 1.0
 License: GPLv2 or later
@@ -11,19 +11,28 @@ A wordpress cleaner plugin to help find and remove orphan, duplicate and missing
 
 == Description ==
 
-A wordpress cleaner plugin to help find and remove orphan, duplicate and missing data. 
+A wordpress cleaner plugin to help find and remove orphan, duplicate and missing data.
 
+= Contributing to WP DB Cleaner =
+If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contribute this back to the code. Submit your pull request or issue on [Github wp-db-cleaner](https://github.com/mehulkaklotar/wp-db-cleaner)
 
 == Installation ==
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+= From your WordPress dashboard =
 
-== Screenshots ==
+1. Visit 'Plugins > Add New'
+2. Search for 'WP DB Cleaner'
+3. Activate WP DB Cleaner from your Plugins page.
+4. Go to WordPress Tools menu -> WP DB Clean.
 
+= From WordPress.org =
+
+1. Download WP DB Cleaner.
+2. Upload the 'wp-db-cleaner' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
+3. Activate WP DB Cleaner from your Plugins page.
+4. Go to WordPress Tools menu -> WP DB Clean.
 
 == Changelog ==
 
 = 1.0 =
-* A change since the previous version.
+* Initial beta release
