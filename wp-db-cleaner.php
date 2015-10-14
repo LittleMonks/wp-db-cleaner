@@ -8,20 +8,20 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
- * @since             1.0.0
+ * @link              https://wordpress.org/plugins/wp-db-cleaner
+ * @since             1.0
  * @package           Db_Cleaner
  *
  * @wordpress-plugin
  * Plugin Name:       WP DB Cleaner
- * Plugin URI:        http://example.com/plugin-name-uri/
+ * Plugin URI:        https://wordpress.org/plugins/wp-db-cleaner
  * Description:       Clean WordPress orphan and duplicate data from database
- * Version:           1.0.0
- * Author:            Your Name or Your Company
- * Author URI:        http://example.com/
+ * Version:           1.0
+ * Author:            littlemonks
+ * Author URI:        https://github.com/mehulkaklotar/wp-db-cleaner
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       plugin-name
+ * Text Domain:       wp-db-cleaner
  * Domain Path:       /languages
  */
 
@@ -31,7 +31,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! defined( 'WP_DB_CLEAN_VERSION' ) ) {
-	define( 'WP_DB_CLEAN_VERSION', '1.0.0' );
+	define( 'WP_DB_CLEAN_VERSION', '1.0' );
 }
 
 /**
