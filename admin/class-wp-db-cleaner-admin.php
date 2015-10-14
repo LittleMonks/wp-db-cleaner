@@ -39,7 +39,7 @@ if ( ! class_exists( 'Db_Cleaner_Admin' ) ) {
 		 * Add tools admin menu
 		 */
 		public function add_tool_page() {
-			add_management_page( 'Wp clean', 'Wp Clean', 'manage_options', 'db-clean', array(
+			add_management_page( 'WP DB Clean', 'WP DB Clean', 'manage_options', 'db-clean', array(
 				$this,
 				'get_clean_ui'
 			) );
