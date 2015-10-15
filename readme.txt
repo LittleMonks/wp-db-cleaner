@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: mehulkaklotar, utkarshpatel
+Contributors: littlemonks, mehulkaklotar, utkarshpatel
 Tags: wp clean, database, db, clean, cleaner
 Requires at least: 4.0
 Tested up to: 4.4
