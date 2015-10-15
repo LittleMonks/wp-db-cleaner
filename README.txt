@@ -16,6 +16,11 @@ A wordpress cleaner plugin to help find and remove orphan, duplicate and missing
 = Contributing to WP DB Cleaner =
 If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contribute this back to the code. Submit your pull request or issue on [Github wp-db-cleaner](https://github.com/mehulkaklotar/wp-db-cleaner)
 
+== Changelog ==
+
+= 1.0 =
+* Initial release
+
 == Installation ==
 
 = From your WordPress dashboard =
@@ -31,8 +36,3 @@ If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contr
 2. Upload the 'wp-db-cleaner' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
 3. Activate WP DB Cleaner from your Plugins page.
 4. Go to WordPress Tools menu -> WP DB Clean.
-
-== Changelog ==
-
-= 1.0 =
-* Initial release
