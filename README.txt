@@ -35,4 +35,4 @@ If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contr
 == Changelog ==
 
 = 1.0 =
-* Initial beta release
+* Initial release
