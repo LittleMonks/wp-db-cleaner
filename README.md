@@ -38,3 +38,7 @@ If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contr
 4. Go to WordPress Tools menu -> WP DB Clean.
 
 
+## Upgrade Notice ##
+
+None.
+

@@ -36,3 +36,8 @@ If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contr
 2. Upload the 'wp-db-cleaner' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
 3. Activate WP DB Cleaner from your Plugins page.
 4. Go to WordPress Tools menu -> WP DB Clean.
+
+
+== Upgrade Notice ==
+
+None.
