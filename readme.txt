@@ -16,6 +16,11 @@ A wordpress cleaner plugin to help find and remove orphan, duplicate and missing
 = Contributing to WP DB Cleaner =
 If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contribute this back to the code. Submit your pull request or issue on [Github wp-db-cleaner](https://github.com/mehulkaklotar/wp-db-cleaner)
 
+== Screenshots ==
+
+1. Orphan data view
+2. Duplicate data view
+
 == Changelog ==
 
 = 1.0 =
