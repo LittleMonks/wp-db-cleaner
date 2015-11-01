@@ -20,7 +20,7 @@ class Wp_Orphan_CLI extends WP_CLI_Command {
 	 *
 	 *
 	 * ## Example
-	 * wp cleaner duplicate wp_transients --limit=10 --offset=10
+	 * wp cleaner duplicate wp_transients --limit=10 --offset=10 or wp cleaner duplicate wp_transients --l=10 --o=10
 	 * wp cleaner duplicate wp_transients delete
 	 */
 	public function duplicate( $args, $assoc_args ) {
@@ -41,8 +41,8 @@ class Wp_Orphan_CLI extends WP_CLI_Command {
 	 *
 	 *
 	 * ## Example
-	 * wp cleaner orphan wp_transients --limit=10 --offset=10
-	 * wp cleaner orphan wp_transients delete
+	 * wp cleaner orphan wp_posts_orphan_rows --limit=10 --offset=10 or wp cleaner orphan wp_posts_orphan_rows --l=10 --o=10 or
+	 * wp cleaner orphan wp_posts_orphan_rows delete
 	 */
 	public function orphan( $args, $assoc_args ) {
 		$this->cli_callback($args,$assoc_args);
