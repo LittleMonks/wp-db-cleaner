@@ -82,6 +82,10 @@ class Db_Cleaner {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/classes/class-wp-db-cleaner-list.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/helper.php';
 
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			require_once( plugin_dir_path( __FILE__ ) . '../admin/wp-cli/class-wp-cleaner-cli.php' );
+		}
+
 	}
 
 	/**

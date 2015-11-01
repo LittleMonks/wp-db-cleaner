@@ -76,7 +76,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		public function delete_wp_posts_orphan_rows() {
 
 			global $wpdb;
-			$query = "DELETE FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)";
+			$query = "DELETE posts.* FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->posts} child ON (posts.post_parent = child.ID) WHERE (posts.post_parent <> 0) AND (child.ID IS NULL)";
 			return $wpdb->query( $query );
 
 		}
