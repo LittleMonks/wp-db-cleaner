@@ -112,7 +112,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		public function delete_wp_postmeta_orhpan_rows() {
 
 			global $wpdb;
-			$query = "DELETE FROM {$wpdb->postmeta} postmeta LEFT JOIN {$wpdb->posts} posts ON (postmeta.post_id = posts.ID) WHERE (posts.ID IS NULL)";
+			$query = "DELETE postmeta.* FROM {$wpdb->postmeta} postmeta LEFT JOIN {$wpdb->posts} posts ON (postmeta.post_id = posts.ID) WHERE (posts.ID IS NULL)";
 			return $wpdb->query( $query );
 
 		}
@@ -148,7 +148,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		public function delete_wp_term_taxonomy_orphan_rows() {
 
 			global $wpdb;
-			$query = "DELETE FROM {$wpdb->term_taxonomy} term_taxonomy LEFT JOIN {$wpdb->terms} terms ON (term_taxonomy.term_id = terms.term_id) WHERE (terms.term_id IS NULL)";
+			$query = "DELETE term_taxonomy.* FROM {$wpdb->term_taxonomy} term_taxonomy LEFT JOIN {$wpdb->terms} terms ON (term_taxonomy.term_id = terms.term_id) WHERE (terms.term_id IS NULL)";
 			return $wpdb->query( $query );
 
 		}
@@ -184,7 +184,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		public function delete_wp_term_relationships_orphan_rows() {
 
 			global $wpdb;
-			$query = "DELETE FROM {$wpdb->term_relationships} term_relationships LEFT JOIN {$wpdb->term_taxonomy} term_taxonomy ON (term_relationships.term_taxonomy_id = term_taxonomy.term_taxonomy_id) WHERE (term_taxonomy.term_taxonomy_id IS NULL)";
+			$query = "DELETE term_relationships.* FROM {$wpdb->term_relationships} term_relationships LEFT JOIN {$wpdb->term_taxonomy} term_taxonomy ON (term_relationships.term_taxonomy_id = term_taxonomy.term_taxonomy_id) WHERE (term_taxonomy.term_taxonomy_id IS NULL)";
 			return $wpdb->query( $query );
 
 		}
@@ -220,7 +220,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		public function delete_wp_usermeta_orphan_rows() {
 
 			global $wpdb;
-			$query = "DELETE FROM {$wpdb->usermeta} usermeta LEFT JOIN {$wpdb->users} users ON (usermeta.user_id = users.ID) WHERE (users.ID IS NULL)";
+			$query = "DELETE usermeta.* FROM {$wpdb->usermeta} usermeta LEFT JOIN {$wpdb->users} users ON (usermeta.user_id = users.ID) WHERE (users.ID IS NULL)";
 			return $wpdb->query( $query );
 
 		}
@@ -256,7 +256,7 @@ if ( ! class_exists( 'Wp_Orphan_Data' ) ) {
 		public function delete_wp_posts_author_orphan_rows() {
 
 			global $wpdb;
-			$query = "DELETE FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->users} users ON (posts.post_author = users.ID) WHERE (users.ID IS NULL)";
+			$query = "DELETE posts.* FROM {$wpdb->posts} posts LEFT JOIN {$wpdb->users} users ON (posts.post_author = users.ID) WHERE (users.ID IS NULL)";
 			return $wpdb->query( $query );
 
 		}
