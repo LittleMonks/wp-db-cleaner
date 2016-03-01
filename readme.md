@@ -8,7 +8,7 @@ A wordpress cleaner plugin to help find and remove orphan, duplicate and missing
 **Tags:** [wp clean](https://wordpress.org/plugins/tags/wp clean), [database](https://wordpress.org/plugins/tags/database), [db](https://wordpress.org/plugins/tags/db), [clean](https://wordpress.org/plugins/tags/clean), [cleaner](https://wordpress.org/plugins/tags/cleaner)  
 **Requires at least:** 4.0  
 **Tested up to:** 4.4.1  
-**Stable tag:** 2.0  
+**Stable tag:** 2.0.1  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 ## Description ##
