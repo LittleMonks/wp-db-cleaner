@@ -53,6 +53,18 @@ if ( ! class_exists( 'Wp_Db_Cleaner_List' ) ) {
 			return $columns;
 		}
 
+		public function views() {
+			$views = $this->get_views();
+			if ( empty( $views ) )
+				return;
+			echo "<ul class='subsubsub'>\n";
+			foreach ( $views as $class => $view ) {
+				$views[ $class ] = "\t<li class='$class'>$view";
+			}
+			echo implode( " |</li>\n", $views ) . "</li>\n";
+			echo "</ul>";
+		}
+
 		protected function get_views() {
 			if ( empty( $this->tab_array ) ) {
 				return array();
