@@ -9,7 +9,7 @@
  * Plugin Name:       WP DB Cleaner
  * Plugin URI:        https://wordpress.org/plugins/wp-db-cleaner
  * Description:       Clean WordPress orphan and duplicate data from database
- * Version:           2.0
+ * Version:           2.0.1
  * Author:            littlemonks
  * Author URI:        https://github.com/mehulkaklotar/wp-db-cleaner
  * License:           GPL-2.0+
@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 if ( ! defined( 'WP_DB_CLEAN_VERSION' ) ) {
-	define( 'WP_DB_CLEAN_VERSION', '1.0' );
+	define( 'WP_DB_CLEAN_VERSION', '2.0.1' );
 }
 
 /**

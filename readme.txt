@@ -2,7 +2,7 @@
 Contributors: littlemonks, mehulkaklotar, utkarshpatel
 Tags: wp clean, database, db, clean, cleaner
 Requires at least: 4.0
-Tested up to: 4.4
+Tested up to: 4.4.1
 Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,9 @@ If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contr
 2. Duplicate data view
 
 == Changelog ==
+
+= 2.0.1 =
+* Fix fatal error on view
 
 = 2.0 =
 * WP_CLI support added

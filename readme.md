@@ -7,7 +7,7 @@ A wordpress cleaner plugin to help find and remove orphan, duplicate and missing
 **Contributors:** [littlemonks](https://profiles.wordpress.org/littlemonks), [mehulkaklotar](https://profiles.wordpress.org/mehulkaklotar), [utkarshpatel](https://profiles.wordpress.org/utkarshpatel)  
 **Tags:** [wp clean](https://wordpress.org/plugins/tags/wp clean), [database](https://wordpress.org/plugins/tags/database), [db](https://wordpress.org/plugins/tags/db), [clean](https://wordpress.org/plugins/tags/clean), [cleaner](https://wordpress.org/plugins/tags/cleaner)  
 **Requires at least:** 4.0  
-**Tested up to:** 4.4  
+**Tested up to:** 4.4.1  
 **Stable tag:** 2.0  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -29,6 +29,9 @@ If you have a patch, or stumbled upon an issue with WP DB Cleaner, you can contr
 ![Duplicate data view](assets/screenshot-2.png)
 
 ## Changelog ##
+
+### 2.0.1 ###
+* Fix fatal error on view
 
 ### 2.0 ###
 * WP_CLI support added
